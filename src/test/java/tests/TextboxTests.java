@@ -15,20 +15,20 @@ import page.TextboxPage;
 
 public class TextboxTests {
 
-
     private Playwright playwright;
     private Browser browser;
     private BrowserContext browserContext;
     private Page page;
     private TextboxPage textboxPage;
-    private String url = "https://demoqa.com/text-box";
-    private String fullname = "Tai";
-    private String email = "tai@mail.com";
-    private String currentaddr = "tma-lab4";
-    private String permanentaddr = "home";
+    private final String url = "https://demoqa.com/text-box";
+    private final String fullname = "Tai";
+    private final String email = "tai@mail.com";
+    private final String currentaddr = "tma-lab4";
+    private final String permanentaddr = "home";
 
     @BeforeSuite
     public void setUp() {
+
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(500));
         browserContext = browser.newContext();
@@ -41,7 +41,6 @@ public class TextboxTests {
     @Test
     public void FillInTextBox() {
 
-
         textboxPage.enterFullName(fullname);
         textboxPage.enterEmail(email);
         textboxPage.enterCurrentAddress(currentaddr);
@@ -51,15 +50,18 @@ public class TextboxTests {
 
     @Test 
     public void ValidateTextInput() {
+
         textboxPage.verifyName(fullname);
         textboxPage.verifyEmail(email);
         textboxPage.verifyCurrentAddr(currentaddr);
         textboxPage.verifyPermaAddr(permanentaddr);
-                page.waitForTimeout(10000);
+        page.waitForTimeout(10000);
+        page.evaluate(email);
     }
 
     @AfterSuite
     public void cleanUp() {
+        
         browserContext.close();
         browser.close();
         playwright.close();

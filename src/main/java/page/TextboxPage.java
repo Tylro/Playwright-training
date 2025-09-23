@@ -64,4 +64,8 @@ public class TextboxPage {
     public void verifyPermaAddr(String expected) {
         PlaywrightAssertions.assertThat(outputperaddr).containsText(expected);
     }
+
+    public String getPageTitle() {
+        return page.title();
+    }
 }
